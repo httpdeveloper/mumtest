@@ -174,41 +174,36 @@ class mumtest{
 	  */
 	 public static int isMadhavArray(int[ ] a) {
 
-        int start = 0;
-        int length = 1;
-        boolean marr = false;
-        int preValue = a[0];
-        int nextValue = 0;
-        int n = findLength(a);
+         if(a.length < 3) return 0;
 
+            int start=1;
+            int index = 0;
+            int max = 0;
+            int sum;
+            int preSum = 0;
 
-        if (n > 0) {
+            preSum = a[0];
 
-            marr = true;
+            while(start < a.length){
+                sum=0;
+                max = start*(start+1)/2;
 
-            for (int i = 0; i < n; i++) {
-                if (start + length <= a.length) {
-                    nextValue = arraySum(a , start , length);
+                if(max > a.length) return 0;
 
-                    if (preValue != nextValue) {
-                        marr = marr && false;
-                    } else {
-                        marr = marr && true;
-                        preValue = nextValue;
-                    }
-
-                    start += length;
-                    length += 1;
+                for(int j=index; j<max;j++){
+                    sum +=a[j];
                 }
+
+                if(sum!=preSum) return 0;
+
+                preSum = sum;
+
+                index += start;
+                start++;
+                if(max==a.length) start = max;
             }
 
-        }
-
-
-        if (marr)
-            return 1;
-        else
-            return 0;
+        return 1;
 
     }
 
